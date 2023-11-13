@@ -4,7 +4,7 @@ pipeline {
     parameters {
         string(name: 'AWS_CREDENTIAL_ID', defaultValue: 'markwang access', description: 'The ID of the AWS credentials to use')
         string(name: 'S3_BUCKET', defaultValue: 'markwangbucket', description: 'The name of the S3 bucket to deploy to')
-        string(name: 'GIT_BRANCH', defaultValue: 'feature/fe', description: 'The Git branch to build and deploy')
+        string(name: 'GIT_BRANCH', defaultValue: 'main', description: 'The Git branch to build and deploy')
     }
 
     environment {
@@ -24,7 +24,7 @@ pipeline {
         stage('Build') {
             steps {
                 // Install dependencies and build the application
-                sh 'npm install --force'
+                sh 'npm install'
                 sh 'yarn build'
             }
         }
