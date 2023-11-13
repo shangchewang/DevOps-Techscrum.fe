@@ -24,7 +24,7 @@ pipeline {
         stage('Build') {
             steps {
                 // Install dependencies and build the application
-                sh 'npm install --force'
+                sh 'npm install'
                 sh 'yarn build'
             }
         }
