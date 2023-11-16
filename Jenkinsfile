@@ -38,7 +38,7 @@ pipeline {
                         credentialsId: params.AWS_CREDENTIAL_ID]
                     ]) {
                     script {
-                        // Assuming your build artifacts are in the 'build/' directory
+                        // Assuming our build artifacts are in the 'build/' directory
                         sh "aws s3 sync build/ s3://${params.S3_BUCKET}/"
                     }
                 }
@@ -53,7 +53,7 @@ pipeline {
         }
         failure {
             echo 'Deployment failed!'
-            slackSend (color: '#FF0000', message: "FAILURE: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+            slackSend (color: '#ff3700', message: "FAILURE: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
         }
     }
 }
