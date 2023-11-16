@@ -15,7 +15,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 script {
-                    // Clone the repository and checkout the specified branch
+                    // Checkout the specified branch
                     checkout([$class: 'GitSCM', branches: [[name: params.GIT_BRANCH]], userRemoteConfigs: [[url: 'https://github.com/shangchewang/DevOps-Techscrum.fe.git']]])
                 }
             }
@@ -29,7 +29,6 @@ pipeline {
                 sh 'npm run build'
             }
         }
-      
 
         stage('Deploy') {
             steps {
@@ -50,9 +49,11 @@ pipeline {
     post {
         success {
             echo 'Deployment successful!'
+            slackSend (color: '#00FF00', message: "SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
         }
         failure {
             echo 'Deployment failed!'
+            slackSend (color: '#FF0000', message: "FAILURE: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
         }
     }
 }
