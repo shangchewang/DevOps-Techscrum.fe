@@ -38,7 +38,7 @@ pipeline {
                         credentialsId: params.AWS_CREDENTIAL_ID]
                     ]) {
                     script {
-                        // Assuming your build artifacts are in the 'build/' directory
+                        // Assuming our build artifacts are in the 'build/' directory
                         sh "aws s3 sync build/ s3://${params.S3_BUCKET}/"
                     }
                 }
